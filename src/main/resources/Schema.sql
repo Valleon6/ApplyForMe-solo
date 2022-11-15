@@ -10,14 +10,22 @@ CREATE TABLE IF NOT EXISTS APPLIER(
 );
 
 CREATE TABLE PROFESSIONAL(
+  id bigserial not null,
+  available_for_interview BOOL NOT NULL DEFAULT 'F',
+
+  user_id int not null,
+  primary key (id)
+);
+
+CREATE TABLE PROFESSIONAL_ATTACHMENT(
     id bigserial NOT NULL,
     passport_link VARCHAR(400) NOT NULL,
     resume_link VARCHAR(400) NOT NULL,
     cover_letter_link VARCHAR(400) NOT NULL,
     created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_on TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
-    professional_id INT NOT NULL,
+    updated_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
+    professional_id INT NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -62,3 +70,64 @@ Create Table MEMBER(
     PRIMARY KEY (ID)
 
 );
+
+CREATE TABLE JOB_SUBMISSION(
+    id bigserial not null,
+    job_title varchar(200),
+    job_link varchar(300) not null,
+    other_comment text not null,
+    created_on timestamp not null,
+    updated_on timestamp not null,
+
+    professional_id int not null,
+    applier_id int not null,
+    primary key (id)
+);
+
+CREATE TABLE MEMBER_ROLE(
+    id bigserial not null,
+    title varchar(200) not null,
+
+    user_id int not null,
+    primary key (id)
+);
+
+ALTER TABLE APPLIER
+    ADD CONSTRAINT applier_user_id
+        FOREIGN KEY (user_id)
+            REFERENCES MEMBER(id);
+
+ALTER TABLE APPLIER
+    ADD CONSTRAINT applier_professional_id
+        FOREIGN KEY (professional_id)
+            REFERENCES PROFESSIONAL (id);
+
+ALTER TABLE PROFESSIONAL
+    ADD CONSTRAINT professional_user_id
+        FOREIGN KEY (user_id)
+            REFERENCES MEMBER (id);
+
+ALTER TABLE PROFESSIONAL_ATTACHMENT
+    ADD CONSTRAINT attachment_professional_id
+        FOREIGN KEY (professional_id)
+            REFERENCES PROFESSIONAL (id);
+
+ALTER TABLE PROFESSIONAL_METADATA
+    ADD CONSTRAINT metadata_professional_id
+        FOREIGN KEY (professional_id)
+            REFERENCES PROFESSIONAL (id);
+
+ALTER TABLE JOB_SUBMISSION
+    ADD CONSTRAINT job_submission_professional_id
+        FOREIGN KEY (professional_id)
+            REFERENCES PROFESSIONAL (id);
+
+ALTER TABLE JOB_SUBMISSION
+    ADD CONSTRAINT job_submission_applier_id
+        FOREIGN KEY (applier_id)
+            REFERENCES APPLIER (id);
+
+ALTER TABLE MEMBER_ROLE
+    ADD CONSTRAINT member_role_user_id
+        FOREIGN KEY (user_id)
+            REFERENCES MEMBER (id);
