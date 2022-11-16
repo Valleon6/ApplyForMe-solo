@@ -4,10 +4,11 @@
 
 #### Description:
 
-You work at a remote company and you earn $1k a month. You are very happy. But you sometimes think - what if there are better jobs out there for me? But it's too much work to apply. In comes: ApplyForMe. A service where you tell us your skills and what you are looking for, and people apply for you for 100s of jobs. All you need to do is attend interviews.
+You work at a remote company, and you earn $1k a month. You are very happy. But you sometimes think - what if there are better jobs out there for me? But it's too much work to apply. In comes: ApplyForMe. A service where you tell us your skills and what you are looking for, and people apply for you for 100s of jobs. All you need to do is attend interviews.
 
-### References
+### Project References
 
 - [Architectural Design Note](https://github.com/teamhydraulic/apply-for-me-backend-architectural-design/blob/main/docs/ARCHITECTURE.md)
-- [Database and SQL Schema]()
+- [Database and SQL Schema](https://github.com/Valleon6/ApplyForMe-solo/blob/master/src/main/resources/Schema.sql)
+- [Object Relational Mapping (ORM) Models](https://github.com/Valleon6/ApplyForMe-solo/tree/master/src/main/java/com/valleon/applyforme/model)
 - [API and Postman Documentation](https://www.postman.com/maintenance-physicist-41351297/workspace/team-hydraulic)
