@@ -9,9 +9,9 @@ CREATE TABLE IF NOT EXISTS APPLIER(
     primary key (id)
 );
 
-CREATE TABLE PROFESSIONAL(
+CREATE TABLE IF NOT EXISTS PROFESSIONAL(
   id bigserial not null,
-  available_for_interview BOOL NOT NULL DEFAULT 'F',
+  available_for_interview BOOL NOT NULL DEFAULT 'f',
 
   user_id int not null,
   primary key (id)
@@ -55,7 +55,7 @@ CREATE TABLE PROFESSIONAL_METADATA(
 
 );
 
-Create Table MEMBER(
+Create Table IF NOT EXISTS MEMBER(
     ID BIGSERIAL NOT NULL,
     FIRST_NAME VARCHAR(40) NOT NULL,
     LAST_NAME VARCHAR(40) NOT NULL,
@@ -71,7 +71,7 @@ Create Table MEMBER(
 
 );
 
-CREATE TABLE JOB_SUBMISSION(
+CREATE TABLE IF NOT EXISTS JOB_SUBMISSION(
     id bigserial not null,
     job_title varchar(200),
     job_link varchar(300) not null,
@@ -84,7 +84,7 @@ CREATE TABLE JOB_SUBMISSION(
     primary key (id)
 );
 
-CREATE TABLE MEMBER_ROLE(
+CREATE TABLE IF NOT EXISTS MEMBER_ROLE(
     id bigserial not null,
     title varchar(200) not null,
 
