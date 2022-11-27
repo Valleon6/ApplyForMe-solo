@@ -21,7 +21,7 @@ public class Professional {
 
     @JoinColumn(name = "user_id")
     @OneToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private User user;
+    private Member member;
 
     @Column(name = "available_for_interview", nullable = false)
     private boolean availableForInterview;

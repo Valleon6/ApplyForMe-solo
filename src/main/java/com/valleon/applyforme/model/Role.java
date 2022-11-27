@@ -17,12 +17,12 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @Column(name = "title", nullable = false)
+    @Column(nullable = false)
     private String title;
 
-    @JoinColumn(name = "user_id")
+    @Column(name = "member_id", nullable = false)
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    private User user;
+    private Member member;
 }

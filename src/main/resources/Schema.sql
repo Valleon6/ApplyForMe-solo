@@ -4,7 +4,7 @@ CREATE DATABASE APPLY_FOR_ME;
 CREATE TABLE IF NOT EXISTS APPLIER(
     id bigserial NOT NULL,
 
-    user_id INT NOT NUll,
+    member_id INT NOT NUll,
     professional_id INT NOT NUll,
     primary key (id)
 );
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS PROFESSIONAL(
   id bigserial not null,
   available_for_interview BOOL NOT NULL DEFAULT 'f',
 
-  user_id int not null,
+  member_id int not null,
   primary key (id)
 );
 
@@ -88,13 +88,13 @@ CREATE TABLE IF NOT EXISTS MEMBER_ROLE(
     id bigserial not null,
     title varchar(200) not null,
 
-    user_id int not null,
+    member_id int not null,
     primary key (id)
 );
 
 ALTER TABLE APPLIER
-    ADD CONSTRAINT applier_user_id
-        FOREIGN KEY (user_id)
+    ADD CONSTRAINT applier_member_id
+        FOREIGN KEY (member_id)
             REFERENCES MEMBER(id);
 
 ALTER TABLE APPLIER
@@ -103,8 +103,8 @@ ALTER TABLE APPLIER
             REFERENCES PROFESSIONAL (id);
 
 ALTER TABLE PROFESSIONAL
-    ADD CONSTRAINT professional_user_id
-        FOREIGN KEY (user_id)
+    ADD CONSTRAINT professional_member_id
+        FOREIGN KEY (member_id)
             REFERENCES MEMBER (id);
 
 ALTER TABLE PROFESSIONAL_ATTACHMENT
@@ -128,6 +128,6 @@ ALTER TABLE JOB_SUBMISSION
             REFERENCES APPLIER (id);
 
 ALTER TABLE MEMBER_ROLE
-    ADD CONSTRAINT member_role_user_id
-        FOREIGN KEY (user_id)
+    ADD CONSTRAINT member_role_member_id
+        FOREIGN KEY (member_id)
             REFERENCES MEMBER (id);
