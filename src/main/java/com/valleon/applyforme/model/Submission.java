@@ -1,9 +1,7 @@
 package com.valleon.applyforme.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.valleon.applyforme.enums.JobLocationType;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,7 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "JOB_SUBMISSION")
+@Builder
+@Table(name = "job_submission")
 public class Submission {
 
     @Id
@@ -36,8 +35,29 @@ public class Submission {
     @Column(name = "job_link", nullable = false)
     private String jobLink;
 
+    @Column(name = "job_location")
+    private String jobLocation;
+
+    @Column(name = "job_company")
+    private String jobCompany;
+
+    @Column(name = "job_location_type")
+    @Enumerated(EnumType.STRING)
+    private JobLocationType jobLocationType = JobLocationType.ONSITE;
+
+    /**
+     * summary or description of the job the applier or reverse recruiter submitted on behalf of the developer.
+     */
+
+    @Column(name = "summary")
+    private String summary;
+
     @Column(name = "other_comment", nullable = false)
     private String otherComment;
+
+   @JoinColumn(name = "professional_profile")
+   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+   private ProfessionalProfile professionalProfile;
 
     @Column(name = "created_on", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

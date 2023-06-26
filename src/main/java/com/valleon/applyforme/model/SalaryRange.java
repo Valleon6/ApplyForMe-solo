@@ -1,38 +1,38 @@
 package com.valleon.applyforme.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
 @Builder
-@Table(name = "roles", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"title", "code"}) })
-public class Role {
+@Table(name = "salary-range")
+public class SalaryRange {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
-
-    @Column(name = "code", nullable = false)
-    private String code;
+   @Column(name = "salary_range", nullable = false)
+   @JsonProperty("salary_range")
+   private String salaryRange;
 
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
     @Column(name = "created_on")
-    private String createdOn;
+    private Date createdOn;
 
     @UpdateTimestamp
     @Temporal(TemporalType.DATE)
     @Column(name = "updated_on")
-    private String updatedOn;
+    private Date updatedOn;
+
 }
