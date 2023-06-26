@@ -26,10 +26,10 @@ public class JobExperience {
     private String company;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "created_on")
-    private Date createdOn;
+    @Column(name = "start_state")
+    private Date startDate;
 
-    @Column(name = "updated_on")
+    @Column(name = "ended_date")
     @Temporal(TemporalType.DATE)
-    private Date updatedOn;
+    private Date endDate;
 }
