@@ -1,4 +1,4 @@
-package com.valleon.applyforme.model;
+package com.valleon.applyforme.enums;
 
 import lombok.Getter;
 

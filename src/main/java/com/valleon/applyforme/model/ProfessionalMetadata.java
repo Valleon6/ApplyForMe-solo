@@ -1,5 +1,6 @@
 package com.valleon.applyforme.model;
 
+import com.valleon.applyforme.enums.JobLocationType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

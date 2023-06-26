@@ -1,18 +1,17 @@
 package com.valleon.applyforme.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "APPLIER")
+@Table(name = "applier")
+@Builder
 public class Applier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +21,11 @@ public class Applier {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "professional_id")
-    private Professional professional;
+//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "professional_id")
+//    private Professional professional;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "professional")
-    private Submission submission;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "applier", cascade = CascadeType.ALL)
+    private Set<Submission> submission;
 
 }
