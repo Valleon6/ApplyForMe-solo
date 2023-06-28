@@ -1,6 +1,5 @@
 package com.valleon.applyforme.enums;
 
-import com.valleon.applyforme.model.Professional;
 import lombok.Getter;
 
 @Getter

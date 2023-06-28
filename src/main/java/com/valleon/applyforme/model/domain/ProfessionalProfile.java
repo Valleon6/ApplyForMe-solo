@@ -1,4 +1,4 @@
-package com.valleon.applyforme.model;
+package com.valleon.applyforme.model.domain;
 
 import com.valleon.applyforme.enums.EmploymentType;
 import com.valleon.applyforme.enums.JobLocationType;

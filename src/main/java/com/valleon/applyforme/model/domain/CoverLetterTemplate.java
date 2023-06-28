@@ -1,22 +1,20 @@
-package com.valleon.applyforme.model;
+package com.valleon.applyforme.model.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "job_title")
-public class JobTitle {
+@AllArgsConstructor
+@Entity
+@Builder
+@Table(name = "Cover_Letter_Template")
+public class CoverLetterTemplate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +22,18 @@ public class JobTitle {
 
     @Column(name = "title", nullable = false)
     private String title;
+    @Column(name = "content", nullable = false)
+    private String content;
 
-    @Column(name = "created_on")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    private Date createdOn;
-
-    @Column(name = "updated_on")
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_on", nullable = false)
+    private Date createdOn;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name ="update_on", nullable = false)
     private Date updatedOn;
+
+
 }

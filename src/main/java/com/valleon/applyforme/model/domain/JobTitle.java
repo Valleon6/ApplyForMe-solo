@@ -1,6 +1,9 @@
-package com.valleon.applyforme.model;
+package com.valleon.applyforme.model.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,9 +15,9 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Table(name = "Country", uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "abbreviation"})})
-public class Country {
+@Table(name = "job_title")
+public class JobTitle {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,18 +25,13 @@ public class Country {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "abbreviation", nullable = false)
-    private String abbreviation;
-
-    @Column
-    @CreationTimestamp
+    @Column(name = "created_on")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date CreatedOn;
+    @CreationTimestamp
+    private Date createdOn;
 
-    @Column
+    @Column(name = "updated_on")
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private Date UpdatedOn;
-
-
+    private Date updatedOn;
 }

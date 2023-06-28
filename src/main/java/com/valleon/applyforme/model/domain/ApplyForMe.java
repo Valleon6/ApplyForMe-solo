@@ -1,4 +1,4 @@
-package com.valleon.applyforme.model;
+package com.valleon.applyforme.model.domain;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

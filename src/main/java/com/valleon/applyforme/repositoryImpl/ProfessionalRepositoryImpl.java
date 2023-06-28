@@ -1,7 +1,7 @@
 package com.valleon.applyforme.repositoryImpl;
 
 import com.valleon.applyforme.exceptions.ProfessionalDuplicateEntityException;
-import com.valleon.applyforme.model.Professional;
+import com.valleon.applyforme.model.domain.Professional;
 import com.valleon.applyforme.repository.ProfessionalRepository;
 
 import javax.persistence.EntityManager;

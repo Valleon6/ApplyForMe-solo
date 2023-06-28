@@ -1,6 +1,6 @@
 package com.valleon.applyforme.repositoryImpl;
 
-import com.valleon.applyforme.model.MemberSecretCode;
+import com.valleon.applyforme.model.domain.MemberSecretCode;
 import com.valleon.applyforme.repository.MemberSecretCodeRepository;
 
 import javax.persistence.EntityManager;

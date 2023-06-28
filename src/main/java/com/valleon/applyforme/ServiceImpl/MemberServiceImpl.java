@@ -4,9 +4,9 @@ import com.valleon.applyforme.enums.RoleType;
 import com.valleon.applyforme.exceptions.EmailAlreadyExistException;
 import com.valleon.applyforme.exceptions.MemberNotFoundException;
 import com.valleon.applyforme.exceptions.RoleNotFoundException;
-import com.valleon.applyforme.model.Member;
-import com.valleon.applyforme.model.Professional;
-import com.valleon.applyforme.model.Role;
+import com.valleon.applyforme.model.domain.Member;
+import com.valleon.applyforme.model.domain.Professional;
+import com.valleon.applyforme.model.domain.Role;
 import com.valleon.applyforme.model.dto.SignUpDto;
 import com.valleon.applyforme.repository.MemberRepository;
 import com.valleon.applyforme.repository.MemberSecretCodeRepository;
@@ -52,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public Member save(SignUpDto body) {
-        boolean existingMember = memberJpaRepository.existsByEmailAddress(body.getEmailAddress())
+        boolean existingMember = memberJpaRepository.existsByEmailAddress(body.getEmailAddress());
         if (existingMember) {
             throw new EmailAlreadyExistException();
         }

@@ -1,6 +1,6 @@
 package com.valleon.applyforme.repository;
 
-import com.valleon.applyforme.model.Professional;
+import com.valleon.applyforme.model.domain.Professional;
 
 public interface ProfessionalRepository {
 

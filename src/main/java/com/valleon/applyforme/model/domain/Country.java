@@ -1,4 +1,4 @@
-package com.valleon.applyforme.model;
+package com.valleon.applyforme.model.domain;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,33 +7,33 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@NoArgsConstructor
 @Builder
-@Table(name = "Cover_Letter_Template")
-public class CoverLetterTemplate {
-
+@Table(name = "Country", uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "abbreviation"})})
+public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title", nullable = false)
     private String title;
-    @Column(name = "content", nullable = false)
-    private String content;
 
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_on", nullable = false)
-    private Date createdOn;
+    @Column(name = "abbreviation", nullable = false)
+    private String abbreviation;
 
+    @Column
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name ="update_on", nullable = false)
-    private Date updatedOn;
+    private Date CreatedOn;
+
+    @Column
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date UpdatedOn;
 
 
 }
