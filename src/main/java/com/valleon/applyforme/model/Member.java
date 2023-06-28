@@ -42,7 +42,7 @@ public class Member {
     /**
      * This column stores a reference to the country of the citizenship of a member in the system
      */
-    @JoinColumn (name = "nationality_id")
+    @JoinColumn(name = "nationality_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Country Nationality;
 
@@ -83,6 +83,9 @@ public class Member {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
     /**
      * This column or property stores a reference to the display picture of a member or user of the system.
      */
@@ -95,7 +98,6 @@ public class Member {
      */
     @Column(name = "active", nullable = false)
     private Boolean active = true;
-
 
 
     @Column(name = "created_on", updatable = false, nullable = false)
@@ -124,10 +126,11 @@ public class Member {
      * <br/>
      * <br/>
      * For Reference on a Junction table
+     *
      * @see <a href="https://learn.microsoft.com/en-us/sql/ssms/visual-db-tools/map-many-to-many-relationships-visual-database-tools?view=sql-server-ver16">Map Many-to-Many Relationships</a>
      */
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name= "memmber_roles",
+    @JoinTable(name = "memmber_roles",
             joinColumns = @JoinColumn
                     (name = "member_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn
@@ -135,10 +138,11 @@ public class Member {
     )
     private Set<Role> roles = new HashSet<>();
 
-    public void addRole(Role role){
+    public void addRole(Role role) {
         this.getRoles().add(role);
     }
-    public void clearRoles(){
+
+    public void clearRoles() {
         this.roles = new HashSet<>();
     }
 
