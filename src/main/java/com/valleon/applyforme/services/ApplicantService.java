@@ -12,4 +12,6 @@ public interface ApplicantService{
     Professional update(Long id, ApplicantDto applicantDto);
 
     ApplyForMeResponse getApplicationList(int pageNo, int pageSize, String sortBy, String sortDir);
+
+    ApplyForMeResponse getApplicationEntries(int pageNo, int pageSize, String sortBy, String sortDir);
 }
