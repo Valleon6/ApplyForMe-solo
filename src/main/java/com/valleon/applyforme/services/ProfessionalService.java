@@ -1,6 +1,7 @@
 package com.valleon.applyforme.services;
 
 import com.valleon.applyforme.model.domain.Professional;
+import com.valleon.applyforme.model.domain.ProfessionalProfile;
 import com.valleon.applyforme.model.dto.professional.ProfessionalDto;
 import org.springframework.data.domain.Page;
 
@@ -15,5 +16,7 @@ public interface ProfessionalService {
     boolean updateProfile(ProfessionalDto professionalDto, Long id);
 
     Page<Professional> retrieveAllProfessionals(int pageNo, int pageSize);
+
+    List<ProfessionalProfile> findAllJobProfiles(Long id);
 
 }

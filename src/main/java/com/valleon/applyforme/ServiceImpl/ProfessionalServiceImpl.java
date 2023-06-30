@@ -3,6 +3,7 @@ package com.valleon.applyforme.ServiceImpl;
 import com.valleon.applyforme.exceptions.ProfessionalNotFoundException;
 import com.valleon.applyforme.model.domain.Member;
 import com.valleon.applyforme.model.domain.Professional;
+import com.valleon.applyforme.model.domain.ProfessionalProfile;
 import com.valleon.applyforme.model.dto.professional.ProfessionalDto;
 import com.valleon.applyforme.repository.MemberRepository;
 import com.valleon.applyforme.repository.ProfessionalRepository;
@@ -92,5 +93,16 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         }
         return professionalsPage;
 
+    }
+
+    @Override
+    public List<ProfessionalProfile> findAllJobProfiles(Long id) {
+        List<ProfessionalProfile> professionalProfileList = professionalJpaRepository.getJobProfile(id);
+
+//        professionalProfileList.forEach(profile -> {
+//            profile.getProfessional().setSubmissions(null);
+//            profile.getProfessional().setProfessionalProfiles(null);
+//        });
+        return professionalProfileList;
     }
 }

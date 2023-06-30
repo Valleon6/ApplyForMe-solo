@@ -1,6 +1,8 @@
 package com.valleon.applyforme.controllers;
 
+import com.valleon.applyforme.constants.PagingConstants;
 import com.valleon.applyforme.model.domain.Professional;
+import com.valleon.applyforme.model.domain.ProfessionalProfile;
 import com.valleon.applyforme.model.dto.professional.ProfessionalDto;
 import com.valleon.applyforme.security.UserDetailsImpl;
 import com.valleon.applyforme.services.ProfessionalService;
@@ -44,6 +46,18 @@ public class ProfessionalController {
     @GetMapping("/allProfessionals/{pageNo}/{pageSize}")
     public Page<Professional> retrieveAllProfessionals(@PathVariable int pageNo, @PathVariable int pageSize){
         return professionalService.retrieveAllProfessionals(pageNo,pageSize);
+    }
+
+    @GetMapping("/profiles")
+    public List<ProfessionalProfile> getAllJobProfiles(@RequestParam(value = "pageNo", required = false, defaultValue = PagingConstants.DEFAULT_PAGE_NUMBER) int pageNo,
+                                                        @RequestParam(value = "pageSize", required = false, defaultValue = PagingConstants.DEFAULT_PAGE_SIZE) int pageSize,
+                                                        @RequestParam(value = "sortBy", required = false, defaultValue = PagingConstants.DEFAULT_SORT_BY) String sortBy,
+                                                        @RequestParam(value = "sortDir", required = false, defaultValue = PagingConstants.DEFAULT_SORT_DIRECTION) String sortDir){
+//        Long currentUser = CurrentUserUtil.getCurrentUser().getId();
+        UserDetailsImpl currentUser = CurrentUserUtil.getCurrentUser();
+
+        return professionalService.findAllJobProfiles(currentUser.getId());
+
     }
 
 }
