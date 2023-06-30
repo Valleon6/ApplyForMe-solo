@@ -41,4 +41,15 @@ public class ApplicantController {
 
         return applicantService.getApplicationList(pageNo, pageSize, sortBy, sortDir);
     }
+
+    @GetMapping("/jobs-applied")
+    public ApplyForMeResponse getApplicationEntries(
+            @RequestParam(value = "pageNo", defaultValue = DEFAULT_PAGE_NUMBER) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = DEFAULT_PAGE_SIZE) int pageSize,
+            @RequestParam(value = "sortBy", defaultValue = DEFAULT_SORT_BY) String sortBy,
+            @RequestParam(value = "pageNo", defaultValue = DEFAULT_SORT_DIRECTION) String sortDir ){
+
+        return applicantService.getApplicationEntries(pageNo, pageSize, sortBy, sortDir);
+
+    }
 }
