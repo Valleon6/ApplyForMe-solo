@@ -20,6 +20,7 @@ import com.valleon.applyforme.utilities.CurrentUserUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+@Service
 public class ApplicantServiceImpl implements ApplicantService {
     private ApplicantRepository applicantRepository;
     private ProfessionalRepository professionalRepository;

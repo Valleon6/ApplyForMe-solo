@@ -31,4 +31,9 @@ public class MemberRepositoryImpl implements MemberRepository {
             throw new MemberDuplicateEntityException();
         }
     }
+
+    @Override
+    public Member getOne(Long id) {
+       return entityManager.find(Member.class, id);
+    }
 }

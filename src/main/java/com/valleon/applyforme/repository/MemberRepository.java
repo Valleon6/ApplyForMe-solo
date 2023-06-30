@@ -7,4 +7,6 @@ public interface MemberRepository {
     Member fetchOne(Long id);
 
     Member saveOne(Member body);
+
+    Member getOne(Long id);
 }
