@@ -3,6 +3,7 @@ package com.valleon.applyforme.ServiceImpl;
 import com.valleon.applyforme.exceptions.ProfessionalNotFoundException;
 import com.valleon.applyforme.model.domain.Member;
 import com.valleon.applyforme.model.domain.Professional;
+import com.valleon.applyforme.model.dto.professional.ProfessionalDto;
 import com.valleon.applyforme.repository.MemberRepository;
 import com.valleon.applyforme.repository.ProfessionalRepository;
 import com.valleon.applyforme.repository.jpa.ProfessionalJpaRepository;
@@ -29,12 +30,53 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     @Transactional()
     public Professional findOne(Long id) {
         Member member = memberRepository.getOne(id);
-        if(member == null){
+        if (member == null) {
             throw new ProfessionalNotFoundException(id);
         }
         Professional professional = professionalRepository.getOne(member.getId());
 //        professional.setSubmissions(null);
 //        professional.setProfessionalProfiles(null);
         return professional;
+    }
+
+    @Override
+    public boolean updateProfile(ProfessionalDto professionalDto, Long id) {
+
+        Professional professional = findOne(id);
+        if (professional == null) {
+            throw new ProfessionalNotFoundException(id);
+        }
+
+        System.out.println(
+                "Before => professional.isAvailableForInterview(): " + professional.isAvailableForInterview()
+        );
+        professional.setAvailableForInterview(professionalDto.isAvailableForInterview());
+
+        System.out.println(
+                "After =>professional.isAvailableForInterview(): " + professionalDto.isAvailableForInterview()
+        );
+        if (professionalDto.getLinkedInLink() != null) {
+            professional.setLinkedinLink(professional.getLinkedinLink());
+        }
+        if (professionalDto.getFacebook() != null) {
+            professional.setFacebookLink(professional.getFacebookLink());
+        }
+        if (professionalDto.getInstagram() != null) {
+            professional.setInstagramLink(professionalDto.getInstagram());
+        }
+        if (professionalDto.getOtherLink() != null) {
+            professional.setOtherLink(professionalDto.getOtherLink());
+        }
+        if (professionalDto.getOtherLink2() != null) {
+            professional.setOtherLink2(professionalDto.getOtherLink2());
+        }
+        if (professionalDto.getHobbies() != null) {
+            professional.setHobbies(professionalDto.getHobbies());
+        }
+        if (professionalDto.getOtherLink3() != null) {
+            professional.setOtherLink3(professionalDto.getOtherLink3());
+        }
+
+        return true;
     }
 }

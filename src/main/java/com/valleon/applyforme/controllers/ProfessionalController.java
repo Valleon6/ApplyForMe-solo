@@ -1,14 +1,12 @@
 package com.valleon.applyforme.controllers;
 
 import com.valleon.applyforme.model.domain.Professional;
+import com.valleon.applyforme.model.dto.professional.ProfessionalDto;
 import com.valleon.applyforme.security.UserDetailsImpl;
 import com.valleon.applyforme.services.ProfessionalService;
 import com.valleon.applyforme.utilities.CurrentUserUtil;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,18 +18,26 @@ public class ProfessionalController {
         this.professionalService = professionalService;
     }
 
-    private ProfessionalService professionalService;
+    private final ProfessionalService professionalService;
 
     @GetMapping(path = "/detail")
-    public Professional findOne(){
+    public Professional findOne() {
         UserDetailsImpl currentUser = CurrentUserUtil.getCurrentUser();
         return professionalService.findOne(currentUser.getId());
     }
 
 
-@GetMapping("/entries")private List<Professional> findAll(
-        @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageOffset){
+    @GetMapping("/entries")
+    private List<Professional> findAll(
+            @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageOffset) {
         return professionalService.findAll(pageOffset);
+    }
+
+    @PutMapping("/update")
+    public Boolean updateProfile (@RequestBody ProfessionalDto professionalDto, Long professional_id){
+        Long currentUser = CurrentUserUtil.getCurrentUser().getId();
+
+        return professionalService.updateProfile(professionalDto,currentUser);
     }
 
 }
