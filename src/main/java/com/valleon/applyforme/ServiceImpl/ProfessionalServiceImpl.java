@@ -8,6 +8,9 @@ import com.valleon.applyforme.repository.MemberRepository;
 import com.valleon.applyforme.repository.ProfessionalRepository;
 import com.valleon.applyforme.repository.jpa.ProfessionalJpaRepository;
 import com.valleon.applyforme.services.ProfessionalService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -78,5 +81,16 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         }
 
         return true;
+    }
+
+    @Override
+    public Page<Professional> retrieveAllProfessionals(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Professional> professionalsPage = professionalJpaRepository.findAll(pageable);
+        if(professionalsPage.isEmpty()){
+            throw new ProfessionalNotFoundException(professionalsPage.getTotalElements());
+        }
+        return professionalsPage;
+
     }
 }

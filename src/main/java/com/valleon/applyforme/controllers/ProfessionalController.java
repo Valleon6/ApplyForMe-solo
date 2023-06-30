@@ -5,6 +5,7 @@ import com.valleon.applyforme.model.dto.professional.ProfessionalDto;
 import com.valleon.applyforme.security.UserDetailsImpl;
 import com.valleon.applyforme.services.ProfessionalService;
 import com.valleon.applyforme.utilities.CurrentUserUtil;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +39,11 @@ public class ProfessionalController {
         Long currentUser = CurrentUserUtil.getCurrentUser().getId();
 
         return professionalService.updateProfile(professionalDto,currentUser);
+    }
+
+    @GetMapping("/allProfessionals/{pageNo}/{pageSize}")
+    public Page<Professional> retrieveAllProfessionals(@PathVariable int pageNo, @PathVariable int pageSize){
+        return professionalService.retrieveAllProfessionals(pageNo,pageSize);
     }
 
 }
