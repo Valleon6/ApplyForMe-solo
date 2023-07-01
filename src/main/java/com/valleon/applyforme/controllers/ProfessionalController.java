@@ -4,6 +4,7 @@ import com.valleon.applyforme.constants.PagingConstants;
 import com.valleon.applyforme.model.domain.Professional;
 import com.valleon.applyforme.model.domain.ProfessionalProfile;
 import com.valleon.applyforme.model.dto.professional.ProfessionalDto;
+import com.valleon.applyforme.model.response.JobDescriptionResponse;
 import com.valleon.applyforme.security.UserDetailsImpl;
 import com.valleon.applyforme.services.ProfessionalService;
 import com.valleon.applyforme.utilities.CurrentUserUtil;
@@ -55,8 +56,14 @@ public class ProfessionalController {
                                                         @RequestParam(value = "sortDir", required = false, defaultValue = PagingConstants.DEFAULT_SORT_DIRECTION) String sortDir){
 //        Long currentUser = CurrentUserUtil.getCurrentUser().getId();
         UserDetailsImpl currentUser = CurrentUserUtil.getCurrentUser();
-
         return professionalService.findAllJobProfiles(currentUser.getId());
+
+    }
+
+    @GetMapping("/jobDescription")
+    public JobDescriptionResponse viewJobDescription (Long submissionId){
+        UserDetailsImpl currentUser = CurrentUserUtil.getCurrentUser();
+        return professionalService.viewJobDescription(currentUser.getId(),submissionId);
 
     }
 
