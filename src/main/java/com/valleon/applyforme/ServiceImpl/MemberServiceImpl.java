@@ -25,12 +25,15 @@ import java.util.Optional;
 @Service
 public class MemberServiceImpl implements MemberService {
 
-    private MemberJpaRepository memberJpaRepository;
-    private MemberRepository memberRepository;
+    private final MemberJpaRepository memberJpaRepository;
+    private final MemberRepository memberRepository;
 
+    @Autowired
     private RoleJpaRepository roleJpaRepository;
 
-    private ProfessionalRepository professionalRepository;
+    private final ProfessionalRepository professionalRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
@@ -38,6 +41,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberSecretCodeRepository memberSecretCodeRepository;
+
+
+    public MemberServiceImpl(MemberJpaRepository memberJpaRepository, MemberRepository memberRepository, RoleJpaRepository roleJpaRepository, ProfessionalRepository professionalRepository, ModelMapper modelMapper) {
+        this.memberJpaRepository = memberJpaRepository;
+        this.memberRepository = memberRepository;
+        this.roleJpaRepository = roleJpaRepository;
+        this.professionalRepository = professionalRepository;
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     @Transactional
@@ -84,7 +96,7 @@ public class MemberServiceImpl implements MemberService {
      * This method helps to generate sign-up verification and was used in the method above
      * to save the sign-up verification code into the DB as shown below.
      * String generatedSecretCode = generateSignUpCode();
-          memberSecretCodeRepository.saveSecretCode(generatedSecretCode);
+     * memberSecretCodeRepository.saveSecretCode(generatedSecretCode);
      */
     private String generateSignUpCode() {
         int[] numbers = new int[4];
