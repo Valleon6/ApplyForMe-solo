@@ -67,4 +67,11 @@ public class ProfessionalController {
 
     }
 
+    @GetMapping("/all-jobs-description")
+    public List<JobDescriptionResponse> retrieveAllJobDescriptions(){
+        UserDetailsImpl currentUser = CurrentUserUtil.getCurrentUser();
+
+        return professionalService.viewAllJobDescriptions(currentUser.getId());
+    }
+
 }

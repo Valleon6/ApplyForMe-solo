@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -126,7 +127,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
            throw new ProfessionalNotFoundException(professionalId);
         }
 
-        List<Submission> submissionList = submissionJpaRepository.findByProfessionalId(professionalId);
+        List<Submission> submissionList = submissionJpaRepository.findAllByProfessionalId(professionalId);
         for(Submission submission : submissionList ){
             if(submission.getId().equals(submissionId)){
                 return JobDescriptionResponse.builder()
@@ -146,5 +147,34 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
         return null;
 
+    }
+
+    @Override
+    public List<JobDescriptionResponse> viewAllJobDescriptions(Long professionalId) {
+        Optional<Professional> professional = professionalJpaRepository.findById(professionalId);
+        if(professional.isEmpty()){
+            throw new ProfessionalNotFoundException(professionalId);
+        }
+
+        List<Submission> submission1 = submissionJpaRepository.findAllByProfessionalId(professionalId);
+        List<JobDescriptionResponse> descriptionResponseslist = new ArrayList<>();
+
+        for(Submission submission : submission1){
+          JobDescriptionResponse jobDescriptionResponse =  JobDescriptionResponse.builder()
+                    .jobLocation(submission.getJobLocation())
+                    .jobTitle(submission.getJobTitle())
+                    .jobLocationType(submission.getJobLocationType().getValue())
+                    .jobCompany(submission.getJobCompany())
+                    .jobLink(submission.getJobLink())
+                    .otherComment(submission.getOtherComment())
+                    .createdOn(submission.getCreatedOn())
+                    .updatedOn(submission.getUpdatedOn())
+                    .applier(submission.getApplier())
+                    .jobSummary(submission.getSummary())
+                    .build();
+
+          descriptionResponseslist.add(jobDescriptionResponse);
+        }
+        return descriptionResponseslist;
     }
 }

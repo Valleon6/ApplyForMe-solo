@@ -24,6 +24,8 @@ public interface ProfessionalService {
 
     JobDescriptionResponse viewJobDescription (Long professionalId, Long SubmissionId);
 
+    List<JobDescriptionResponse> viewAllJobDescriptions(Long professionalId);
+
 
 
 }

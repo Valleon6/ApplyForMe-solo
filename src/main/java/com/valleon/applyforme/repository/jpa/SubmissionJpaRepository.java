@@ -9,5 +9,5 @@ import java.util.List;
 public interface SubmissionJpaRepository extends JpaRepository<Submission, Long> {
 
     @Query("select s from Submission s where s.professional.member.id = :professionalId")
-    List<Submission> findByProfessionalId(Long professionalId);
+    List<Submission> findAllByProfessionalId(Long professionalId);
 }
