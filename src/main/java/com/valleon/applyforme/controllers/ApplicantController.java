@@ -16,7 +16,11 @@ import static com.valleon.applyforme.constants.PagingConstants.*;
 @RequestMapping(value = "applicant", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ApplicantController {
 
-    private ApplicantService applicantService;
+    private final ApplicantService applicantService;
+
+    public ApplicantController(ApplicantService applicantService) {
+        this.applicantService = applicantService;
+    }
 
     @GetMapping("/details")
     public Member getMyDetails(Long id) {
