@@ -1,5 +1,7 @@
 package com.valleon.applyforme.controllers;
 
+import com.valleon.applyforme.constants.PagingConstants;
+import com.valleon.applyforme.model.response.ApplyForMeResponse;
 import com.valleon.applyforme.services.JobSubmissionService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,17 @@ public class JobSubmissionController {
 
 
     @GetMapping("/applier/count/{applierId}")
-    public Long jobSubmissionsCount(@PathVariable(name = "applierId") Long applierId){
+    public Long jobSubmissionsCount(@PathVariable(name = "applierId") Long applierId) {
         return jobSubmissionService.countAllApplierSubmissions(applierId);
+    }
+
+    @GetMapping("/entries")
+    public ApplyForMeResponse getAllSubmissions(
+            @RequestParam(required = false, value = "pageNo", defaultValue = PagingConstants.DEFAULT_PAGE_NUMBER) int pageNo,
+            @RequestParam(required = false, value = "pageSize", defaultValue = PagingConstants.DEFAULT_PAGE_SIZE) int pageSize,
+            @RequestParam(required = false, value = "sortDir", defaultValue = PagingConstants.DEFAULT_SORT_DIRECTION) String sortDir,
+            @RequestParam(required = false, value = "sortBy", defaultValue = PagingConstants.DEFAULT_SORT_BY) String sortBy){
+        return jobSubmissionService.getAllJobSubmissions(pageNo, pageSize, sortDir, sortBy);
     }
 
 }
