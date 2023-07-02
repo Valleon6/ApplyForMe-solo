@@ -7,4 +7,7 @@ public interface JobSubmissionService {
     Long countAllApplierSubmissions(Long applierId);
 
     ApplyForMeResponse getAllJobSubmissions(int pageNo, int pageSize, String sortDir, String sortBy);
+
+    ApplyForMeResponse filterJobSubmission(int pageNo, int pageSize, String sortDir, String sortBy, String q);
+
 }

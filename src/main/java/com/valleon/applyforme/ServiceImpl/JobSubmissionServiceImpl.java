@@ -14,11 +14,8 @@ import com.valleon.applyforme.utilities.ApplyForMeUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -34,9 +31,10 @@ public class JobSubmissionServiceImpl implements JobSubmissionService {
 
     private final ApplierJpaRepository applierJpaRepository;
 
-    public JobSubmissionServiceImpl(SubmissionJpaRepository submissionJpaRepository, ApplierRepository applierRepository, ApplierJpaRepository applierJpaRepository) {
+    public JobSubmissionServiceImpl(SubmissionJpaRepository submissionJpaRepository, ApplierRepository applierRepository, ApplyForMeUtil applyForMeUtil, ApplierJpaRepository applierJpaRepository) {
         this.submissionJpaRepository = submissionJpaRepository;
         this.applierRepository = applierRepository;
+        this.applyForMeUtil = applyForMeUtil;
         this.applierJpaRepository = applierJpaRepository;
     }
 
@@ -52,6 +50,12 @@ public class JobSubmissionServiceImpl implements JobSubmissionService {
     @Override
     public ApplyForMeResponse getAllJobSubmissions(int pageNo, int pageSize, String sortDir, String sortBy) {
         Page<Submission> submissions = submissionJpaRepository.findAll(ApplyForMeUtil.createPageable(pageNo, pageSize, sortDir, sortBy));
+        return getJobSubmissionResponse(submissions);
+    }
+
+    @Override
+    public ApplyForMeResponse filterJobSubmission(int pageNo, int pageSize, String sortDir, String sortBy, String q) {
+        Page<Submission> submissions = submissionJpaRepository.findSubmissionsBySearch(ApplyForMeUtil.createPageable(pageNo, pageSize, sortBy, sortDir), q);
         return getJobSubmissionResponse(submissions);
     }
 

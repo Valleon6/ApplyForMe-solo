@@ -32,4 +32,14 @@ public class JobSubmissionController {
         return jobSubmissionService.getAllJobSubmissions(pageNo, pageSize, sortDir, sortBy);
     }
 
+    @GetMapping("/entries/search")
+    public ApplyForMeResponse getAllSubmissionsBySearch(
+            @RequestParam(required = false, value = "pageNo", defaultValue = PagingConstants.DEFAULT_PAGE_NUMBER) int pageNo,
+            @RequestParam(required = false, value = "pageSize", defaultValue = PagingConstants.DEFAULT_PAGE_SIZE) int pageSize,
+            @RequestParam(required = false, value = "sortDir", defaultValue = PagingConstants.DEFAULT_SORT_DIRECTION) String sortDir,
+            @RequestParam(required = false, value = "sortBy", defaultValue = PagingConstants.DEFAULT_SORT_BY) String sortBy,
+            @RequestParam(value = "q") String q){
+        return jobSubmissionService.filterJobSubmission(pageNo, pageSize, sortDir, sortBy, q);
+    }
+
 }

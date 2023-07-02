@@ -1,6 +1,8 @@
 package com.valleon.applyforme.repository.jpa;
 
 import com.valleon.applyforme.model.domain.Submission;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,4 +15,7 @@ public interface SubmissionJpaRepository extends JpaRepository<Submission, Long>
 
     @Query("select count (jb) from Submission jb where jb.applier.member.id = :applierId")
     Long countSubmissionByApplierId(Long applierId);
+
+   @Query(value = "select * from Submission where (job_title like %:q% or created_on like %:q% or job_location_type like %:q%)", nativeQuery = true)
+   Page<Submission> findSubmissionsBySearch(Pageable pageable, String q);
 }
