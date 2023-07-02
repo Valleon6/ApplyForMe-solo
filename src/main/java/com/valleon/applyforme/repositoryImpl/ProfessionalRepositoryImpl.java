@@ -3,6 +3,7 @@ package com.valleon.applyforme.repositoryImpl;
 import com.valleon.applyforme.exceptions.ProfessionalDuplicateEntityException;
 import com.valleon.applyforme.model.domain.Professional;
 import com.valleon.applyforme.repository.ProfessionalRepository;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -10,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
 public class ProfessionalRepositoryImpl implements ProfessionalRepository {
 
     @PersistenceContext

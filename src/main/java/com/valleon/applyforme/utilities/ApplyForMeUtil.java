@@ -1,14 +1,16 @@
 package com.valleon.applyforme.utilities;
 
-import com.valleon.applyforme.security.UserDetailsImpl;
+import com.valleon.applyforme.ServiceImpl.UserDetailsServiceImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ApplyForMeUtil {
-    private UserDetailsImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
-    public ApplyForMeUtil(UserDetailsImpl userDetailsService) {
+    public ApplyForMeUtil(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

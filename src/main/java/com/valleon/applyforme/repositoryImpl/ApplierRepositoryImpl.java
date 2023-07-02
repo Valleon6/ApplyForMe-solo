@@ -2,10 +2,12 @@ package com.valleon.applyforme.repositoryImpl;
 
 import com.valleon.applyforme.model.domain.Applier;
 import com.valleon.applyforme.repository.ApplierRepository;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+@Repository
 public class ApplierRepositoryImpl implements ApplierRepository {
 
     @PersistenceContext
