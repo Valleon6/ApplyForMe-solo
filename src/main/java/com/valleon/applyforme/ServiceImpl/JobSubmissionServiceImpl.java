@@ -3,10 +3,12 @@ package com.valleon.applyforme.ServiceImpl;
 import com.valleon.applyforme.exceptions.ApplierNotFoundException;
 import com.valleon.applyforme.model.domain.Applier;
 import com.valleon.applyforme.model.domain.Submission;
+import com.valleon.applyforme.model.dto.submission.ApplierSubmissionDto;
 import com.valleon.applyforme.model.dto.submission.SubmissionDto;
 import com.valleon.applyforme.model.response.ApplyForMeResponse;
 import com.valleon.applyforme.model.response.SubmissionEntriesResponse;
 import com.valleon.applyforme.repository.ApplierRepository;
+import com.valleon.applyforme.repository.JobSubmissionRepository;
 import com.valleon.applyforme.repository.jpa.ApplierJpaRepository;
 import com.valleon.applyforme.repository.jpa.SubmissionJpaRepository;
 import com.valleon.applyforme.services.JobSubmissionService;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +27,7 @@ public class JobSubmissionServiceImpl implements JobSubmissionService {
     private final SubmissionJpaRepository submissionJpaRepository;
     private final ApplierRepository applierRepository;
 
+    private final JobSubmissionRepository jobSubmissionRepository;
     private final ApplyForMeUtil applyForMeUtil;
 
     @Autowired
@@ -31,9 +35,10 @@ public class JobSubmissionServiceImpl implements JobSubmissionService {
 
     private final ApplierJpaRepository applierJpaRepository;
 
-    public JobSubmissionServiceImpl(SubmissionJpaRepository submissionJpaRepository, ApplierRepository applierRepository, ApplyForMeUtil applyForMeUtil, ApplierJpaRepository applierJpaRepository) {
+    public JobSubmissionServiceImpl(SubmissionJpaRepository submissionJpaRepository, ApplierRepository applierRepository, JobSubmissionRepository jobSubmissionRepository, ApplyForMeUtil applyForMeUtil, ApplierJpaRepository applierJpaRepository) {
         this.submissionJpaRepository = submissionJpaRepository;
         this.applierRepository = applierRepository;
+        this.jobSubmissionRepository = jobSubmissionRepository;
         this.applyForMeUtil = applyForMeUtil;
         this.applierJpaRepository = applierJpaRepository;
     }
@@ -57,6 +62,13 @@ public class JobSubmissionServiceImpl implements JobSubmissionService {
     public ApplyForMeResponse filterJobSubmission(int pageNo, int pageSize, String sortDir, String sortBy, String q) {
         Page<Submission> submissions = submissionJpaRepository.findSubmissionsBySearch(ApplyForMeUtil.createPageable(pageNo, pageSize, sortBy, sortDir), q);
         return getJobSubmissionResponse(submissions);
+    }
+
+
+    @Override
+    public List<ApplierSubmissionDto> getApplierSubmissionDetails(Long applierId) {
+        List<ApplierSubmissionDto> applierSubmissionDtos = jobSubmissionRepository.getSubmissionDetails(applierId);
+       return applierSubmissionDtos;
     }
 
     public ApplyForMeResponse getJobSubmissionResponse(Page<Submission> submission) {

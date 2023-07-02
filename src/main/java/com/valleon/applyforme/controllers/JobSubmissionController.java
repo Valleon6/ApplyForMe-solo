@@ -1,17 +1,21 @@
 package com.valleon.applyforme.controllers;
 
 import com.valleon.applyforme.constants.PagingConstants;
+import com.valleon.applyforme.model.dto.submission.ApplierSubmissionDto;
 import com.valleon.applyforme.model.response.ApplyForMeResponse;
 import com.valleon.applyforme.services.JobSubmissionService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping(value = "/job-submission", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "submission", produces = {MediaType.APPLICATION_JSON_VALUE})
 @CrossOrigin("*")
 public class JobSubmissionController {
 
     private final JobSubmissionService jobSubmissionService;
+
 
     public JobSubmissionController(JobSubmissionService jobSubmissionService) {
         this.jobSubmissionService = jobSubmissionService;
@@ -40,6 +44,11 @@ public class JobSubmissionController {
             @RequestParam(required = false, value = "sortBy", defaultValue = PagingConstants.DEFAULT_SORT_BY) String sortBy,
             @RequestParam(value = "q") String q){
         return jobSubmissionService.filterJobSubmission(pageNo, pageSize, sortDir, sortBy, q);
+    }
+
+    @GetMapping("/submission-details")
+    public List<ApplierSubmissionDto> getSubmissionDetails(Long applierId){
+        return jobSubmissionService.getApplierSubmissionDetails(applierId);
     }
 
 }
