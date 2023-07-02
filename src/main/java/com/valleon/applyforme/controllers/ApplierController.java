@@ -15,6 +15,8 @@ public class ApplierController {
 
     private final ApplierService applierService;
 
+
+
     public ApplierController(ApplierService applierService) {
         this.applierService = applierService;
     }
@@ -23,4 +25,5 @@ public class ApplierController {
     public List<ApplierDto> retrieveAllAppliers (){
         return applierService.getAllAppliers();
     }
+
 }

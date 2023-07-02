@@ -10,4 +10,7 @@ public interface SubmissionJpaRepository extends JpaRepository<Submission, Long>
 
     @Query("select s from Submission s where s.professional.member.id = :professionalId")
     List<Submission> findAllByProfessionalId(Long professionalId);
+
+    @Query("select count (jb) from Submission jb where jb.applier.member.id = :applierId")
+    Long countSubmissionByApplierId(Long applierId);
 }
