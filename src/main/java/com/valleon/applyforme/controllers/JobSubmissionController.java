@@ -51,4 +51,6 @@ public class JobSubmissionController {
         return jobSubmissionService.getApplierSubmissionDetails(applierId);
     }
 
+
+
 }

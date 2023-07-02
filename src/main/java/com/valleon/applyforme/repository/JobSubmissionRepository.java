@@ -7,4 +7,6 @@ import java.util.List;
 public interface JobSubmissionRepository {
 
     public List<ApplierSubmissionDto> getSubmissionDetails(Long applierId);
+
+
 }

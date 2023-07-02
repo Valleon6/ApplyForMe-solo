@@ -10,17 +10,21 @@ import com.valleon.applyforme.model.response.SubmissionEntriesResponse;
 import com.valleon.applyforme.repository.ApplierRepository;
 import com.valleon.applyforme.repository.JobSubmissionRepository;
 import com.valleon.applyforme.repository.jpa.ApplierJpaRepository;
+import com.valleon.applyforme.repository.jpa.JobSubmissionJpaRepository;
 import com.valleon.applyforme.repository.jpa.SubmissionJpaRepository;
 import com.valleon.applyforme.services.JobSubmissionService;
-import com.valleon.applyforme.utilities.ApplyForMeUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.valleon.applyforme.utilities.ApplyForMeUtil.createPageable;
 
 @Service
 public class JobSubmissionServiceImpl implements JobSubmissionService {
@@ -28,18 +32,17 @@ public class JobSubmissionServiceImpl implements JobSubmissionService {
     private final ApplierRepository applierRepository;
 
     private final JobSubmissionRepository jobSubmissionRepository;
-    private final ApplyForMeUtil applyForMeUtil;
-
+    private final JobSubmissionJpaRepository jobSubmissionJpaRepository;
     @Autowired
     private ModelMapper modelMapper;
 
     private final ApplierJpaRepository applierJpaRepository;
 
-    public JobSubmissionServiceImpl(SubmissionJpaRepository submissionJpaRepository, ApplierRepository applierRepository, JobSubmissionRepository jobSubmissionRepository, ApplyForMeUtil applyForMeUtil, ApplierJpaRepository applierJpaRepository) {
+    public JobSubmissionServiceImpl(SubmissionJpaRepository submissionJpaRepository, ApplierRepository applierRepository, JobSubmissionRepository jobSubmissionRepository, JobSubmissionJpaRepository jobSubmissionJpaRepository, ApplierJpaRepository applierJpaRepository) {
         this.submissionJpaRepository = submissionJpaRepository;
         this.applierRepository = applierRepository;
         this.jobSubmissionRepository = jobSubmissionRepository;
-        this.applyForMeUtil = applyForMeUtil;
+        this.jobSubmissionJpaRepository = jobSubmissionJpaRepository;
         this.applierJpaRepository = applierJpaRepository;
     }
 
@@ -54,13 +57,13 @@ public class JobSubmissionServiceImpl implements JobSubmissionService {
 
     @Override
     public ApplyForMeResponse getAllJobSubmissions(int pageNo, int pageSize, String sortDir, String sortBy) {
-        Page<Submission> submissions = submissionJpaRepository.findAll(ApplyForMeUtil.createPageable(pageNo, pageSize, sortDir, sortBy));
+        Page<Submission> submissions = submissionJpaRepository.findAll(createPageable(pageNo, pageSize, sortDir, sortBy));
         return getJobSubmissionResponse(submissions);
     }
 
     @Override
     public ApplyForMeResponse filterJobSubmission(int pageNo, int pageSize, String sortDir, String sortBy, String q) {
-        Page<Submission> submissions = submissionJpaRepository.findSubmissionsBySearch(ApplyForMeUtil.createPageable(pageNo, pageSize, sortBy, sortDir), q);
+        Page<Submission> submissions = submissionJpaRepository.findSubmissionsBySearch(createPageable(pageNo, pageSize, sortBy, sortDir), q);
         return getJobSubmissionResponse(submissions);
     }
 
@@ -69,6 +72,27 @@ public class JobSubmissionServiceImpl implements JobSubmissionService {
     public List<ApplierSubmissionDto> getApplierSubmissionDetails(Long applierId) {
         List<ApplierSubmissionDto> applierSubmissionDtos = jobSubmissionRepository.getSubmissionDetails(applierId);
        return applierSubmissionDtos;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public ApplyForMeResponse getEntries(int pageNo, int pageSize, String sortDir, String sortBy, String q, Date from, Date to) {
+      Page<Submission> submissions = null;
+        if(from != null && to != null  && q != null && q.trim() != ""){
+            submissions = jobSubmissionJpaRepository.getEntries(from,to,q, createPageable(pageNo, pageSize, sortBy, sortDir));
+        }
+        else if (from != null && to != null) {
+            submissions = jobSubmissionJpaRepository.getEntries(from,to, createPageable(pageNo, pageSize, sortBy, sortDir));
+        }
+        if(q != null && q.trim() != ""){
+            submissions =jobSubmissionJpaRepository.getEntries(q,createPageable(pageNo, pageSize, sortBy, sortDir));
+        }
+        else {
+            submissions =jobSubmissionJpaRepository.getEntries(createPageable(pageNo, pageSize, sortBy, sortDir));
+
+        }
+
+        return getJobSubmissionResponse(submissions);
     }
 
     public ApplyForMeResponse getJobSubmissionResponse(Page<Submission> submission) {
