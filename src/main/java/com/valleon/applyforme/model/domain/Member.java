@@ -49,7 +49,7 @@ public class Member {
     /**
      * This column stores a reference to the country where the actor resides
      */
-    @JoinColumn(name = "country_of_residence")
+    @JoinColumn(name = "country_of_residence_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Country countryOfResidence;
 
