@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -29,10 +30,10 @@ public class Role {
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
     @Column(name = "created_on")
-    private String createdOn;
+    private Date createdOn;
 
     @UpdateTimestamp
     @Temporal(TemporalType.DATE)
     @Column(name = "updated_on")
-    private String updatedOn;
+    private Date updatedOn;
 }

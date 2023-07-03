@@ -19,6 +19,6 @@ public interface SubmissionJpaRepository extends JpaRepository<Submission, Long>
    @Query(value = "select * from Submission where (job_title like %:q% or created_on like %:q% or job_location_type like %:q%)", nativeQuery = true)
    Page<Submission> findSubmissionsBySearch(Pageable pageable, String q);
 
-   @Query(value = "select s from Submission s where s.applier.member = :id")
-   Page<Submission> findSubmissionsByApplier_Id ( Long ApplierId);
+//   @Query(value = "select s from Submission s where s.applier.member = :id")
+//   Page<Submission> findSubmissionsByApplier_Id ( Long ApplierId);
 }

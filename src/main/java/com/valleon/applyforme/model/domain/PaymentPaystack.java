@@ -14,7 +14,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Payment Paystack")
+@Table(name = "Payment_Paystack")
 public class PaymentPaystack {
 
     @Id
@@ -37,12 +37,12 @@ public class PaymentPaystack {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "paid_at")
-    private String paidAt;
+    private Date paidAt;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private String createdAt;
+    private Date createdAt;
 
     @Column(name = "channel")
     private String channel;

@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Builder
-@Table(name = "salary-range")
+@Table(name = "salary_range")
 public class SalaryRange {
 
     @Id

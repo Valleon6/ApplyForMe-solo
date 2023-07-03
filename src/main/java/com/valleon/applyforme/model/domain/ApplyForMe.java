@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @Entity
-@Table(name = "apply for me")
+@Table(name = "apply_for_me")
 public class ApplyForMe {
 
     public ApplyForMe(){

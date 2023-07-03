@@ -27,7 +27,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "member", indexes = {@Index(columnList = "email_address", name = "email_address_idx", unique = true)})
+@Table(name = "member", indexes = {@Index(columnList = "email_address", name = "email_address_id", unique = true)})
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

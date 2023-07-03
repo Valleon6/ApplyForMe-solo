@@ -16,7 +16,7 @@ public interface JobSubmissionJpaRepository extends JpaRepository<Submission, Lo
     @Query(value = "select jb from Submission jb where" +
             "(jb.createdOn between :from and :to) and " +
             "jb.jobTitle like '%' || :q || '%' or jb.jobLocation like '%' || :q || '%' or " +
-            "jb.jobCompany like '%' || :q || '%' or jb.jobLink '%' || :q || '%' )")
+            "jb.jobCompany like '%' || :q || '%' or jb.jobLink like '%' || :q || '%' ")
     Page<Submission> getEntries(Date from, Date to, String q, Pageable pageable);
 
 
@@ -25,8 +25,9 @@ public interface JobSubmissionJpaRepository extends JpaRepository<Submission, Lo
 
     @Query(value = "select jb from Submission jb where " +
             "jb.jobTitle like '%' || :q || '%' or jb.jobLocation like '%' || :q || '%' or " +
-            "jb.jobCompany like '%' || :q || '%' or jb.jobLink '%' || :q || '%' ) ")
+            "jb.jobCompany like '%' || :q || '%' or jb.jobLink like '%' || :q || '%' ")
     Page<Submission> getEntries(String q, Pageable pageable);
+
 
     @Query(value = "select jb from Submission jb")
     Page<Submission> getEntries(Pageable pageable);
