@@ -1,7 +1,9 @@
 package com.valleon.applyforme.controllers.payment;
 
 import com.valleon.applyforme.model.dto.payment.CreatePlanDto;
+import com.valleon.applyforme.model.dto.payment.InitializePaymentDto;
 import com.valleon.applyforme.model.response.payment.CreatePlanResponse;
+import com.valleon.applyforme.model.response.payment.InitializePaymentResponse;
 import com.valleon.applyforme.services.payment.PaystackService;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,8 +26,13 @@ public class PaystackController {
 
     @PreAuthorize("hasRole('Professional')")
     @PostMapping("/create-plan")
-    public CreatePlanResponse createPlan(@Validated @RequestBody CreatePlanDto createPlanDto) throws Exception{
-      return paystackService.createPlan(createPlanDto);
+    public CreatePlanResponse createPlan(@Validated @RequestBody CreatePlanDto createPlanDto) throws Exception {
+        return paystackService.createPlan(createPlanDto);
     }
 
+    @PostMapping("/initialize-payment")
+    @PreAuthorize("hasRole('Prodfessional')")
+    public InitializePaymentResponse initializePayment (@Validated @RequestBody InitializePaymentDto initializePaymentDto){
+        return paystackService.initializePayment(initializePaymentDto);
+    }
 }
