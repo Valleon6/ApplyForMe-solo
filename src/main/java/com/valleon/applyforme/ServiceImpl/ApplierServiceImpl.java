@@ -18,11 +18,10 @@ public class ApplierServiceImpl implements ApplierService {
    @Autowired
    private ApplierJpaRepository applierJpaRepository;
 
-  private final ModelMapper modelMapper;
+  @Autowired
+  private  ModelMapper modelMapper;
 
-    public ApplierServiceImpl(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
+
 
     @Override
     @Transactional(readOnly = true)
