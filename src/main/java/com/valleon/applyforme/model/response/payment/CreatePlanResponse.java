@@ -23,7 +23,7 @@ public class CreatePlanResponse {
     @AllArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Data{
+    public static class Data{
 
 
         @JsonProperty("name")

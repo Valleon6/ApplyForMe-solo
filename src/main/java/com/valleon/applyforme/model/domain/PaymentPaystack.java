@@ -34,15 +34,11 @@ public class PaymentPaystack {
     @Column(name = "gateway_response")
     private String gatewayResponse;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "paid_at")
-    private Date paidAt;
+    private String paidAt;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private Date createdAt;
+    private String createdAt;
 
     @Column(name = "channel")
     private String channel;
@@ -55,7 +51,7 @@ public class PaymentPaystack {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private PricingPlanType princingPlanType = PricingPlanType.BASIC;
+    private PricingPlanType pricingPlanType = PricingPlanType.BASIC;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

@@ -28,7 +28,7 @@ public class InitializePaymentResponse {
     @NoArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Data {
+    public static class Data {
         @JsonProperty("authorization_url")
         private String authorizationUrl;
 
