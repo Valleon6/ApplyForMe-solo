@@ -1,6 +1,6 @@
 package com.valleon.applyforme.utilities;
 
-import com.valleon.applyforme.security.UserDetailsImpl;
+import com.valleon.applyforme.model.security.UserDetailsImpl;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

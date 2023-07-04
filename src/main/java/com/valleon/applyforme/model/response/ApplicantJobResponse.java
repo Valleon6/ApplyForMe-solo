@@ -1,7 +1,7 @@
 package com.valleon.applyforme.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.valleon.applyforme.enums.JobLocationType;
+import com.valleon.applyforme.model.enums.JobLocationType;
 import com.valleon.applyforme.model.domain.Applier;
 import com.valleon.applyforme.model.domain.Professional;
 import com.valleon.applyforme.model.domain.ProfessionalProfile;

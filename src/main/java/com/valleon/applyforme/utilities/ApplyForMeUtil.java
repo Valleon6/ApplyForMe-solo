@@ -1,6 +1,6 @@
 package com.valleon.applyforme.utilities;
 
-import com.valleon.applyforme.ServiceImpl.UserDetailsServiceImpl;
+import com.valleon.applyforme.services.ServiceImpl.UserDetailsServiceImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

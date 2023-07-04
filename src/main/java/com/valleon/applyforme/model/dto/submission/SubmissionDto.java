@@ -1,7 +1,7 @@
 package com.valleon.applyforme.model.dto.submission;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.valleon.applyforme.enums.JobLocationType;
+import com.valleon.applyforme.model.enums.JobLocationType;
 import lombok.*;
 
 import java.util.Date;

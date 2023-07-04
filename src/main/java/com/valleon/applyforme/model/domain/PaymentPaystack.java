@@ -1,6 +1,6 @@
 package com.valleon.applyforme.model.domain;
 
-import com.valleon.applyforme.enums.PricingPlanType;
+import com.valleon.applyforme.model.enums.PricingPlanType;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 

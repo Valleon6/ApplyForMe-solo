@@ -1,6 +1,6 @@
 package com.valleon.applyforme.model.domain;
 
-import com.valleon.applyforme.enums.JobLocationType;
+import com.valleon.applyforme.model.enums.JobLocationType;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
